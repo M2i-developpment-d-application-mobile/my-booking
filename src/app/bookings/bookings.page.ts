@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Booking } from './booking.model';
+import { IonItemSliding } from '@ionic/angular';
+import { BookingService } from './booking.service';
 
 @Component({
   selector: 'app-bookings',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingsPage implements OnInit {
 
-  constructor() { }
+
+  loadedBookings: Booking[] = []
+
+  constructor(private bookingService: BookingService) { }
 
   ngOnInit() {
+    this.loadedBookings = this.bookingService.bookings;
+  }
+
+  onCancelBooking(bookingId: string, slidingEl: IonItemSliding){
+    slidingEl.close();
+    // delete booking
   }
 
 }
